@@ -8,42 +8,39 @@
 #include "Game.hpp"
 #include "Draw.hpp"
 
-#if 0
-struct Node{
-    char id;
-    std::unordered_map<int,std::vector<int>> vectors;
-};
-#endif
-
 int main(int argc, char *argv[]){
     Global_strings str_glob;
     std::shared_ptr<Board> current_board = std::make_shared<Board>();
-
     int player_input = 0;
 
-    if(strcmp(argv[1],"-f") == 0){
-        current_board->is_playerturn = true;
+    // Check commmand line options
+    if(argc > 1){
+        // Check if Player goes first
+        if(strcmp(argv[1],"-f") == 0){
+            current_board->is_playerturn = true;
+        }
     }
 
     Draw::print_rules(str_glob,current_board->is_playerturn);
     Draw::print_board(*current_board);
 
+    // Main game loop
     while(current_board->result == 0){
-        player_input = Draw::prompt(str_glob,current_board->is_playerturn);
-
+        Draw::print_turn_start(str_glob,current_board->is_playerturn);
+        
         if(current_board->is_playerturn){
+            player_input = Draw::player_prompt(str_glob);
             Game::player_turn(*current_board,player_input);
         }
         else{
-            Game::computer_turn(*current_board);
+            current_board->is_playerturn = true;//FIXME: remove when computer_turn is implemented
+            //Game::computer_turn(*current_board);
         }
 
         Draw::print_board(*current_board);
     }
     
     Draw::print_endgame(str_glob,current_board->result);
-    //if (game_result == 1) std::cout << "Player wins!" << std::endl;
-    //else if (game_result == -1) std::cout << computer_name << " wins!" << std::endl;
 
     return current_board->result;
 }
