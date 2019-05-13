@@ -64,3 +64,7 @@ void Draw::print_endgame(Global_strings str_glob,int result){
     
     std::cout << std::endl;
 }
+
+void Draw::print_error_input(){
+    std::cout << "Invalid move, please try again." << std::endl;
+}

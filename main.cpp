@@ -11,8 +11,7 @@
 int main(int argc, char *argv[]){
     Global_strings str_glob;
     std::shared_ptr<Board> current_board = std::make_shared<Board>();
-    int player_input = 0;
-
+    
     // Check commmand line options
     if(argc > 1){
         // Check if Player goes first
@@ -29,12 +28,16 @@ int main(int argc, char *argv[]){
         Draw::print_turn_start(str_glob,current_board->is_playerturn);
         
         if(current_board->is_playerturn){
-            player_input = Draw::player_prompt(str_glob);
-            Game::player_turn(*current_board,player_input);
+            int player_input = Draw::player_prompt(str_glob);
+            bool valid_move = Game::player_turn(*current_board,player_input);
+            if(!valid_move) Draw::print_error_input();
         }
         else{
-            current_board->is_playerturn = true;//FIXME: remove when computer_turn is implemented
-            //Game::computer_turn(*current_board);
+            bool valid_move = Game::computer_turn(*current_board);
+            if(!valid_move){
+                Draw::print_error_input();
+                return -1;
+            }
         }
 
         Draw::print_board(*current_board);
@@ -42,7 +45,7 @@ int main(int argc, char *argv[]){
     
     Draw::print_endgame(str_glob,current_board->result);
 
-    return current_board->result;
+    return 0;
 }
 
 #if 0
