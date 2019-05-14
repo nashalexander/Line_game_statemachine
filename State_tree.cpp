@@ -33,13 +33,11 @@ void State_tree::generate_tree(Board current_board){
     for(int i=0 ; i < tree.size() ; i++){
 
         // Evaluate state only if no one has won yet
-        if(tree[i]->board.result == 0){
+        if(tree[i]->board.get_result() == 0){
 
             // Generate all possible next states
             for(int move_id=0 ; move_id<POSSIBLE_MOVES ; move_id++){
                 Board new_board = tree[i]->board;
-
-                // board.make_move(...) updates board.result
                 bool move_valid = new_board.make_move(move_id);
                 if(move_valid){
                     std::shared_ptr<State> new_state = std::make_shared<State>(new_board);
@@ -81,11 +79,11 @@ bool State_tree::make_move(Board &board){
 
 // Recursive function to evaluate a state tree
 void State_tree::eval_branch(State state,int *total_win_value,int *total_outcomes){
-    if(state.board.result != 0){
+    if(state.board.get_result() != 0){
         (*total_outcomes)++;
 
         // Computer wins
-        if(state.board.result == -1) (*total_win_value)++;
+        if(state.board.get_result() == -1) (*total_win_value)++;
     }
     else{
         for(std::pair<int,std::shared_ptr<State>> pair : state.vectors){

@@ -9,11 +9,11 @@ bool State::add_vector(int value, std::shared_ptr<State> state){
     return true;
 };
 
-std::shared_ptr<State> State::get_next_state(int input){
+std::shared_ptr<State> State::get_next_state(int input) const{
     try{
         return vectors.at(input);
     }
-    catch (const std::out_of_range& oor){
+    catch (const std::out_of_range& e){
         return NULL;
     }
 };

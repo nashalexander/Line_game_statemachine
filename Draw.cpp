@@ -2,34 +2,38 @@
 #include <iostream>
 #include <limits>
 
-void Draw::print_rules(Global_strings str_glob, bool player_turn){
+void Draw::print_help(){
+    std::cout << "ABOUT:" << std::endl;
+    Draw::print_rules();
+
+    std::cout << "OPTIONS:" << std::endl;
+    std::cout << "-h : Print this dialog" << std::endl;
+    std::cout << "-f : Sets player to go first, computer goes first by default" << std::endl;
+}
+
+void Draw::print_rules(){
     std::cout << "Be the first to the end of the board to win the game!"
               << std::endl << "Place 1 or 2 markers per turn" << std::endl;
-    
-    if(player_turn)
-        std::cout << "Player goes first" << std::endl;
-    else
-        std::cout << str_glob.computer_name << " goes first" << std::endl;
     
     std::cout << std::endl;
 }
 
 void Draw::print_board(Board board){
-    int board_size = sizeof(board.spaces)/sizeof(board.spaces[0]);
-
-    for(int i = 0 ; i < board_size ; i++){
-        if(board.spaces[i])
+    for(int i = 0 ; i < BOARD_SIZE ; i++){
+        if(board[i])
             std::cout << "X ";
         else
             std::cout << "_ ";
     }
 
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 }
 
 void Draw::print_turn_start(Global_strings str_glob,bool player_turn){
     if(player_turn) std::cout << "Player's turn!" << std::endl;
     else std::cout << str_glob.computer_name << "'s turn!" << std::endl;
+
+    std::cout << std::endl;
 }
 
 int Draw::player_prompt(Global_strings str_glob){
@@ -60,8 +64,7 @@ void Draw::print_endgame(Global_strings str_glob,int result){
     else if(result == -1){
         std::cout << str_glob.computer_name << " won!" << std::endl;
     }
-    //TODO: else throw error here
-    
+        
     std::cout << std::endl;
 }
 

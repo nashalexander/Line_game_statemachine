@@ -2,9 +2,9 @@
 #define GAME
 
 #include "Globals.hpp"
+#include "Board.hpp"
 
-class Game
-{
+class Game{
 private:
     static int get_move_id(int input);
 public:

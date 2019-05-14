@@ -5,14 +5,16 @@ OBJS_HEADERS = \
 	Draw.hpp \
 	Game.hpp \
 	State_tree.hpp \
-	State.hpp
+	State.hpp \
+	Board.hpp
 OBJS_SOURCE= \
 	main.cpp \
 	Draw.cpp \
 	Game.cpp \
 	State_tree.cpp \
-	State.cpp
-CFLAGS = --std=c++11 -g
+	State.cpp \
+	Board.cpp
+CFLAGS = --std=c++11
 
 all: $(OBJS_HEADERS) $(OBJS_SOURCE)
 	$(CC) $(CFLAGS) $(OBJS_HEADERS) $(OBJS_SOURCE) -o $(OBJ_NAME)  
