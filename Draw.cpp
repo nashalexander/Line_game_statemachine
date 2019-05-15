@@ -3,19 +3,19 @@
 #include <limits>
 
 void Draw::print_help(){
-    std::cout << "ABOUT:" << std::endl;
+    std::cout << "ABOUT:" << "\n";
     Draw::print_rules();
 
-    std::cout << "OPTIONS:" << std::endl;
-    std::cout << "-h : Print this dialog" << std::endl;
-    std::cout << "-f : Sets player to go first, computer goes first by default" << std::endl;
+    std::cout << "OPTIONS:" << "\n";
+    std::cout << "-h : Print this dialog" << "\n";
+    std::cout << "-f : Sets player to go first, computer goes first by default" << "\n";
 }
 
 void Draw::print_rules(){
     std::cout << "Be the first to the end of the board to win the game!"
-              << std::endl << "Place 1 or 2 markers per turn" << std::endl;
+              << "\n" << "Place 1 or 2 markers per turn" << "\n";
     
-    std::cout << std::endl;
+    std::cout << "\n";
 }
 
 void Draw::print_board(Board board){
@@ -26,14 +26,14 @@ void Draw::print_board(Board board){
             std::cout << "_ ";
     }
 
-    std::cout << std::endl << std::endl;
+    std::cout << "\n" << "\n";
 }
 
 void Draw::print_turn_start(Global_strings str_glob,bool player_turn){
-    if(player_turn) std::cout << "Player's turn!" << std::endl;
-    else std::cout << str_glob.computer_name << "'s turn!" << std::endl;
+    if(player_turn) std::cout << "Player's turn!" << "\n";
+    else std::cout << str_glob.computer_name << "'s turn!" << "\n";
 
-    std::cout << std::endl;
+    std::cout << "\n";
 }
 
 int Draw::player_prompt(Global_strings str_glob){
@@ -44,7 +44,7 @@ int Draw::player_prompt(Global_strings str_glob){
         std::cin >> input;
 
         if((input != 1) && (input != 2)){
-            std::cout << str_glob.prompt_error << std::endl;
+            std::cout << str_glob.prompt_error << "\n";
 
             // Necessary to allow an input re-attempt
             std::cin.clear();
@@ -53,21 +53,21 @@ int Draw::player_prompt(Global_strings str_glob){
         }
     }
 
-    std::cout << std::endl;
+    std::cout << "\n";
     return input;
 }
 
 void Draw::print_endgame(Global_strings str_glob,int result){
     if(result == 1){
-        std::cout << "Player won!" << std::endl;
+        std::cout << "Player won!" << "\n";
     }
     else if(result == -1){
-        std::cout << str_glob.computer_name << " won!" << std::endl;
+        std::cout << str_glob.computer_name << " won!" << "\n";
     }
         
-    std::cout << std::endl;
+    std::cout << "\n";
 }
 
 void Draw::print_error_input(){
-    std::cout << "Invalid move, please try again." << std::endl;
+    std::cout << "Invalid move, please try again." << "\n";
 }
